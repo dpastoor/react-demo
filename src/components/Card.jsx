@@ -9,7 +9,7 @@ export default class Card extends React.Component {
   render() {
     let data = this.props.data;
     return (
-      <div> {data.name + " of " + data.suit} </div>
+      <li style={{display: 'inline'}}> {data.name + " of " + data.suit} </li>
     );
   }
 }

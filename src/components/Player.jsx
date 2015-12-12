@@ -13,7 +13,10 @@ export default class Player extends React.Component {
     return (
        <div className="Player" style={{color: (cardValues > 21) ? 'red' : 'black'}}>
            <h1 onClick={this.props.handleClick}> Player {data.name} cards :
-             {_.map(data.cards, (c) => <Card data={c} />)} totaling: {cardValues}
+             <ul>
+               {_.map(data.cards, (c) => <Card data={c} />)}
+             </ul>
+             totaling: {cardValues}
            </h1>
        </div>
     );
