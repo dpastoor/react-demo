@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-export default class App extends React.Component {
+import Card from './Card.jsx'
+import {GridList, GridTile} from 'material-ui';
+export default class Player extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -11,12 +13,9 @@ export default class App extends React.Component {
     return (
        <div className="Player" style={{color: (cardValues > 21) ? 'red' : 'black'}}>
            <h1 onClick={this.props.handleClick}> Player {data.name} cards :
-             {_.map(data.cards, (c) => " " + c.name + " of " + c.suit + " ")} totaling: {cardValues}
+             {_.map(data.cards, (c) => <Card data={c} />)} totaling: {cardValues}
            </h1>
        </div>
     );
   }
 }
-
-
-
