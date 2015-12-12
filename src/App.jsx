@@ -34,7 +34,7 @@ export default class App extends React.Component {
       <div className="App">
         <RaisedButton label="Add a Player" onClick={this._addPlayer.bind(this)} />
         {players}
-        <div>All card values played: </div>
+        <div>All card values played: {_.pluck(this.state.players, "cards")} </div>
       </div>
   );
   }

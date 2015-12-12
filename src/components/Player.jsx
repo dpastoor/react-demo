@@ -9,7 +9,6 @@ export default class App extends React.Component {
     return (
        <div className="Counter">
            <h1 onClick={this.props.handleClick}> Player {data.name} with cards: {data.cards} </h1>
-
        </div>
     );
   }
