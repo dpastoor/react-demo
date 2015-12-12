@@ -31,6 +31,13 @@ export default class App extends React.Component {
       availableCards: cards
     })
   }
+  _clearCards(playerIndex) {
+    let players = this.state.players;
+    players[playerIndex].cards = [];
+    this.setState({
+      players: players
+    })
+  }
   _shuffleCards() {
     let players = _.map(this.state.players, (p) => {
       return {name: p.name, cards: []}
@@ -38,6 +45,18 @@ export default class App extends React.Component {
     this.setState({
       availableCards: _.shuffle(initDeck(1)),
       players: players
+    })
+  }
+  _deal() {
+    if (this.state.availableCards.length < 20) {
+      this._shuffleCards();
+      console.log('reshuffling')
+      return;
+    }
+    _.forEach(this.state.players, (p, i) => {
+      this._clearCards(i);
+      this._addCard(i);
+      this._addCard(i);
     })
   }
   render() {
@@ -49,6 +68,7 @@ export default class App extends React.Component {
         <div>
           <RaisedButton label="Add a Player" onClick={this._addPlayer.bind(this)} />
           <RaisedButton label="Shuffle Cards" onClick={this._shuffleCards.bind(this)} />
+          <RaisedButton label="Deal" onClick={this._deal.bind(this)} />
         </div>
         {players}
         <div>
