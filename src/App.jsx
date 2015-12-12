@@ -10,13 +10,19 @@ export default class App extends React.Component {
       counters: [1]
     }
   }
+  _addCounter() {
+    this.setState({
+      counters: this.state.counters.concat(this.state.counters.length + 1)
+    })
+
+  }
   render() {
     let counters = _.map(this.state.counters, (c) => {
       return <Counter name={c} />
     });
     return (
       <div className="App">
-        <h1>hello from {this.props.name}</h1>
+        <h1 onClick={this._addCounter.bind(this)}> Add A Counter </h1>
         {counters}
       </div>
   );
