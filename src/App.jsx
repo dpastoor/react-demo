@@ -19,14 +19,22 @@ export default class App extends React.Component {
       })
     })
   }
+  _addCard(playerIndex) {
+    let players = this.state.players;
+    players[playerIndex].cards = this.state.players[playerIndex].cards.concat(Math.floor(Math.random()*10))
+    this.setState({
+      players: players
+    })
+  }
   render() {
     let players = _.map(this.state.players, (player, i) => {
-      return <Player data={player} key={i} />
+      return <Player data={player} key={i} handleClick={this._addCard.bind(this, i)} />
     });
     return (
       <div className="App">
         <RaisedButton label="Add a Player" onClick={this._addPlayer.bind(this)} />
         {players}
+        <div>All card values played: </div>
       </div>
   );
   }
