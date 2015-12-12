@@ -25,7 +25,7 @@ export default class App extends React.Component {
     });
     return (
       <div className="App">
-        <h1 onClick={this._addPlayer.bind(this)}> Add A Player </h1>
+        <RaisedButton label="Add a Player" onClick={this._addPlayer.bind(this)} />
         {players}
       </div>
   );
