@@ -25,7 +25,7 @@ export default class App extends React.Component {
     let players = this.state.players;
     let cards = this.state.availableCards;
     let card = cards.pop();
-    players[playerIndex].cards = this.state.players[playerIndex].cards.concat(card)
+    players[playerIndex].cards = this.state.players[playerIndex].cards.concat(card);
     this.setState({
       players: players,
       availableCards: cards
@@ -51,8 +51,10 @@ export default class App extends React.Component {
           <RaisedButton label="Shuffle Cards" onClick={this._shuffleCards.bind(this)} />
         </div>
         {players}
-        <div>All card values played: {/*_.pluck(this.state.players, "cards")*/} </div>
-        <div>Cards left: {this.state.availableCards.length}
+        <div>
+          <h1>
+            Cards left: {this.state.availableCards.length}
+          </h1>
           {_.map(this.state.availableCards, (c) => {
           return (
             <div>
