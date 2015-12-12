@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {RaisedButton} from 'material-ui';
 import Player from './components/Player.jsx';
-import initDeck from 'functions/initDeck'
+import initDeck from './functions/initDeck'
 import _ from 'lodash'
 import './css/styles.css'
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: []
+      players: [],
+      availableCards: []
     }
   }
   _addPlayer() {
@@ -27,15 +28,28 @@ export default class App extends React.Component {
       players: players
     })
   }
+  _shuffleCards() {
+    this.setState({availableCards: initDeck(1)})
+  }
   render() {
     let players = _.map(this.state.players, (player, i) => {
       return <Player data={player} key={i} handleClick={this._addCard.bind(this, i)} />
     });
     return (
       <div className="App">
-        <RaisedButton label="Add a Player" onClick={this._addPlayer.bind(this)} />
+        <div>
+          <RaisedButton label="Add a Player" onClick={this._addPlayer.bind(this)} />
+          <RaisedButton label="Shuffle Cards" onClick={this._shuffleCards.bind(this)} />
+        </div>
         {players}
         <div>All card values played: {_.pluck(this.state.players, "cards")} </div>
+        <div>Cards left: {_.map(this.state.availableCards, (c) => {
+          return (
+            <div>
+              {c.name + " of " + c.suit + " "}
+            </div>
+            )
+          })}</div>
       </div>
   );
   }
