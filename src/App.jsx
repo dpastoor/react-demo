@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {RaisedButton} from 'material-ui';
 import Player from './components/Player.jsx';
 import _ from 'lodash'
 import './css/styles.css'
