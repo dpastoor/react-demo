@@ -7,10 +7,9 @@ export default class App extends React.Component {
   }
   render() {
     let data = this.props.data;
-    let cardValues = _.sum(_.pluck(data.cards, 'value'))
-    console.log('cardValues: ' + cardValues)
+    let cardValues = _.sum(_.pluck(data.cards, 'value'));
     return (
-       <div className="Player">
+       <div className="Player" style={{color: (cardValues > 21) ? 'red' : 'black'}}>
            <h1 onClick={this.props.handleClick}> Player {data.name}
              with cards:
              {_.map(data.cards, (c) => c.name + " of " + c.suit + " ")}
