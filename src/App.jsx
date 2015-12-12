@@ -23,13 +23,22 @@ export default class App extends React.Component {
   }
   _addCard(playerIndex) {
     let players = this.state.players;
-    players[playerIndex].cards = this.state.players[playerIndex].cards.concat(Math.floor(Math.random()*10))
+    let cards = this.state.availableCards;
+    let card = cards.pop();
+    players[playerIndex].cards = this.state.players[playerIndex].cards.concat(card)
     this.setState({
-      players: players
+      players: players,
+      availableCards: cards
     })
   }
   _shuffleCards() {
-    this.setState({availableCards: initDeck(1)})
+    let players = _.map(this.state.players, (p) => {
+      return {name: p.name, cards: []}
+    });
+    this.setState({
+      availableCards: _.shuffle(initDeck(1)),
+      players: players
+    })
   }
   render() {
     let players = _.map(this.state.players, (player, i) => {
@@ -42,8 +51,9 @@ export default class App extends React.Component {
           <RaisedButton label="Shuffle Cards" onClick={this._shuffleCards.bind(this)} />
         </div>
         {players}
-        <div>All card values played: {_.pluck(this.state.players, "cards")} </div>
-        <div>Cards left: {_.map(this.state.availableCards, (c) => {
+        <div>All card values played: {/*_.pluck(this.state.players, "cards")*/} </div>
+        <div>Cards left: {this.state.availableCards.length}
+          {_.map(this.state.availableCards, (c) => {
           return (
             <div>
               {c.name + " of " + c.suit + " "}
