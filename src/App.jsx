@@ -10,8 +10,8 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <h1>hello from {this.props.name}</h1>
-        <Counter />
-        <Counter />
+        <Counter myNameProp="Cool Counter" />
+        <Counter myNameProp="Lame Counter" />
       </div>
   );
   }
