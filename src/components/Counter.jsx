@@ -20,7 +20,6 @@ export default class App extends React.Component {
     })
   }
   render() {
-    console.log(this.props.myNameProp)
     return (
        <div className="Counter">
            <h1 onClick={this._resetCounter.bind(this)}>Counter {this.props.name} value:  {this.state.counter}</h1>

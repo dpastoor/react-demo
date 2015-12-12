@@ -7,18 +7,17 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      counters: [1]
+      counters: []
     }
   }
   _addCounter() {
     this.setState({
       counters: this.state.counters.concat(this.state.counters.length + 1)
     })
-
   }
   render() {
-    let counters = _.map(this.state.counters, (c) => {
-      return <Counter name={c} />
+    let counters = _.map(this.state.counters, (c, i) => {
+      return <Counter name={c} key={i} />
     });
     return (
       <div className="App">
