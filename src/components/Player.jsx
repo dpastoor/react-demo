@@ -16,7 +16,6 @@ export default class Player extends React.Component {
              <ul>
                {_.map(data.cards, (c) => <Card data={c} />)}
              </ul>
-
            </h1>
        </div>
     );
