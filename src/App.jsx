@@ -12,7 +12,7 @@ export default class App extends React.Component {
       availableCards: []
     }
   }
-  _addPlayer() {
+  addPlayer() {
     this.setState({
       players: this.state.players.concat({
         name: this.state.players.length + 1,
@@ -20,7 +20,7 @@ export default class App extends React.Component {
       })
     })
   }
-  _addCard(playerIndex) {
+  addCard(playerIndex) {
     let players = this.state.players;
     let cards = this.state.availableCards;
     let card = cards.pop();
@@ -30,14 +30,14 @@ export default class App extends React.Component {
       availableCards: cards
     })
   }
-  _clearCards(playerIndex) {
+  clearCards(playerIndex) {
     let players = this.state.players;
     players[playerIndex].cards = [];
     this.setState({
       players: players
     })
   }
-  _shuffleCards() {
+  shuffleCards() {
     let players = _.map(this.state.players, (p) => {
       return {name: p.name, cards: []}
     });
@@ -46,28 +46,28 @@ export default class App extends React.Component {
       players: players
     })
   }
-  _deal() {
+  deal() {
     if (this.state.availableCards.length < 20) {
-      this._shuffleCards();
+      this.shuffleCards();
       console.log('reshuffling')
       return;
     }
     _.forEach(this.state.players, (p, i) => {
-      this._clearCards(i);
-      this._addCard(i);
-      this._addCard(i);
+      this.clearCards(i);
+      this.addCard(i);
+      this.addCard(i);
     })
   }
   render() {
     let players = _.map(this.state.players, (player, i) => {
-      return <Player data={player} key={i} handleClick={this._addCard.bind(this, i)} />
+      return <Player data={player} key={i} handleClick={this.addCard.bind(this, i)} />
     });
     return (
       <div className="App">
         <div>
-          <RaisedButton label="Add a Player" onClick={this._addPlayer.bind(this)} />
-          <RaisedButton label="Shuffle Cards" onClick={this._shuffleCards.bind(this)} />
-          <RaisedButton label="Deal" onClick={this._deal.bind(this)} />
+          <RaisedButton label="Add a Player" onClick={this.addPlayer.bind(this)} />
+          <RaisedButton label="Shuffle Cards" onClick={this.shuffleCards.bind(this)} />
+          <RaisedButton label="Deal" onClick={this.deal.bind(this)} />
         </div>
         {players}
         <div>
