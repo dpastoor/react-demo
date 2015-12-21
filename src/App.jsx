@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {RaisedButton} from 'material-ui';
 import Player from './components/Player.jsx';
-import initDeck from './functions/initDeck'
-import _ from 'lodash'
+import initDeck from './functions/initDeck';
+import _ from 'lodash';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -16,19 +16,25 @@ export default class App extends React.Component {
     this.setState({
       players: this.state.players.concat({
         name: this.state.players.length + 1,
-        cards: []
+        cards: [],
+        totalValue: 0
       })
-    })
+    });
   }
   addCard(playerIndex) {
     let players = this.state.players;
+    let player = players[playerIndex];
     let cards = this.state.availableCards;
-    let card = cards.pop();
-    players[playerIndex].cards = this.state.players[playerIndex].cards.concat(card);
-    this.setState({
-      players: players,
-      availableCards: cards
-    })
+    if (player.totalValue < 21) {
+      let card = cards.pop();
+      player.cards = player.cards.concat(card);
+      player.totalValue += card.value;
+      players[playerIndex] = player;
+      this.setState({
+        players: players,
+        availableCards: cards
+      });
+    }
   }
   clearCards(playerIndex) {
     let players = this.state.players;
@@ -49,7 +55,7 @@ export default class App extends React.Component {
   deal() {
     if (this.state.availableCards.length < 20) {
       this.shuffleCards();
-      console.log('reshuffling')
+      console.log('reshuffling');
       return;
     }
     _.forEach(this.state.players, (p, i) => {
