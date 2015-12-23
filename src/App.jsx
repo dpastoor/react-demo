@@ -39,13 +39,14 @@ export default class App extends React.Component {
   clearCards(playerIndex) {
     let players = this.state.players;
     players[playerIndex].cards = [];
+    players[playerIndex].totalValue = 0;
     this.setState({
       players: players
     })
   }
   shuffleCards() {
     let players = _.map(this.state.players, (p) => {
-      return {name: p.name, cards: []}
+      return {name: p.name, cards: [], totalValue: 0}
     });
     this.setState({
       availableCards: _.shuffle(initDeck(1)),
