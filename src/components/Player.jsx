@@ -8,6 +8,7 @@ export default class Player extends React.Component {
     super(props);
   }
   render() {
+    console.log({...this.props})
     let data = this.props.data;
     return (
        <div className="Player" style={{color: (data.totalValue > 21) ? 'red' : 'black'}}>
@@ -20,3 +21,8 @@ export default class Player extends React.Component {
     );
   }
 }
+
+Player.propTypes = {
+  data: React.PropTypes.object.isRequired,
+  handleClick: React.PropTypes.func
+};
