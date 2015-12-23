@@ -15,5 +15,9 @@ export default class Card extends React.Component {
 }
 
 Card.propTypes = {
- data: React.PropTypes.object.isRequired
+ data: React.PropTypes.shape({
+   name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+   suit: React.PropTypes.string,
+   value: React.PropTypes.number
+ }).isRequired
 };

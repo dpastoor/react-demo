@@ -23,6 +23,10 @@ export default class Player extends React.Component {
 }
 
 Player.propTypes = {
-  data: React.PropTypes.object.isRequired,
+  data: React.PropTypes.shape({
+    name: React.PropTypes.number,
+    cards: React.PropTypes.array,
+    totalValue: React.PropTypes.number
+  }).isRequired,
   handleClick: React.PropTypes.func
 };
