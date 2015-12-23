@@ -81,9 +81,9 @@ export default class App extends React.Component {
           <h1>
             Cards left: {this.state.availableCards.length}
           </h1>
-          {_.map(this.state.availableCards, (c) => {
+          {_.map(this.state.availableCards, (c, i) => {
           return (
-            <div>
+            <div key={i} >
               {c.name + " of " + c.suit + " "}
             </div>
             )
